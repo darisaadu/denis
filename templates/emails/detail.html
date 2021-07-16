@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <img src="{% static 'img/beach.jpg' %}" alt='Beach' class="img-fluid"/>
+            <h1>Not working: {email}</h1>
+            <p>Working: {{ obj.email }}</p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
