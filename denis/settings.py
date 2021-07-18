@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'rv5gdy1bjt3=yi@a*2!4!1w5dp*hd#&l^ies$mq5i!(r#38@p7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['tanim-cli.herokuapp.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = []
 
 
 # Application definition

@@ -4,13 +4,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
 from django.http import HttpResponse, Http404
+from account.decorator import unauthenticated_user, allowed_users, admin_only
 
 from . models import EmailEntry
 from .forms import EmailEntryForm, EmailEntryUpdateForm
 # Create your views here.
 
+def custormer_page(request, *args, **kwargs):
+    return render(request, 'user_page.html', {})
+
 # @login_required
-@staff_member_required(login_url='/login')
 def email_entry_update_view(request, id=None, *args, **kwargs):
     try:
         obj = EmailEntry.objects.get(id=id)
@@ -23,8 +26,9 @@ def email_entry_update_view(request, id=None, *args, **kwargs):
     return render(request, 'emails/update.html', {'form': form, 'obj': obj})
 
 
-# @login_required
-# @staff_member_required(login_url='/login')
+@login_required
+# @allowed_users(['admin'])
+@admin_only
 def email_entry_create_view(request, *args, **kwargs):
     context = {}
     if request.user.is_authenticated:
@@ -41,7 +45,7 @@ def email_entry_create_view(request, *args, **kwargs):
 
 
 # @login_required
-@staff_member_required(login_url='/login')
+# @allowed_users(['admin'])
 def email_entry_list_view(request, *args, **kwargs):
     queryset = EmailEntry.objects.all()
     context = {'object_list': queryset}
@@ -49,7 +53,7 @@ def email_entry_list_view(request, *args, **kwargs):
 
 
 # @login_required
-@staff_member_required(login_url='/login')
+# @allowed_users(['admin'])
 def email_entry_detail_view(request, id=None, *args, **kwargs):
     try:
         obj = EmailEntry.objects.get(id=id)
@@ -60,7 +64,7 @@ def email_entry_detail_view(request, id=None, *args, **kwargs):
 
 
 # @login_required
-@staff_member_required(login_url='/login')
+# @allowed_users(['admin'])
 def email_entry_delete_view(request, id=None, *args, **kwargs):
     try:
         obj = EmailEntry.objects.get(id=id)
