@@ -13,7 +13,7 @@ from .forms import EmailEntryForm, EmailEntryUpdateForm
 def custormer_page(request, *args, **kwargs):
     return render(request, 'user_page.html', {})
 
-# @login_required
+@login_required
 def email_entry_update_view(request, id=None, *args, **kwargs):
     try:
         obj = EmailEntry.objects.get(id=id)
@@ -44,7 +44,7 @@ def email_entry_create_view(request, *args, **kwargs):
     return render(request, 'home.html', context)
 
 
-# @login_required
+@login_required
 # @allowed_users(['admin'])
 def email_entry_list_view(request, *args, **kwargs):
     queryset = EmailEntry.objects.all()
@@ -52,7 +52,8 @@ def email_entry_list_view(request, *args, **kwargs):
     return render(request, 'emails/list.html', context)
 
 
-# @login_required
+@login_required
+@admin_only
 # @allowed_users(['admin'])
 def email_entry_detail_view(request, id=None, *args, **kwargs):
     try:
@@ -63,7 +64,7 @@ def email_entry_detail_view(request, id=None, *args, **kwargs):
     return render(request, 'emails/detail.html', context)
 
 
-# @login_required
+@login_required
 # @allowed_users(['admin'])
 def email_entry_delete_view(request, id=None, *args, **kwargs):
     try:

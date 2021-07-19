@@ -1,5 +1,13 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+{% load static %}  
 
-{% block content %} 
-    This is the User custormer page>
+{% block content %}
+<div class="container">
+    <div class="row mt-2">
+        <div class="col-md-3 mx-auto">
+            <img src="{% static 'img/beach.jpg' %}" alt="Beach Image" class="img-fluid">
+            <p class="lead">Your profile image is here!</p>
+        </div>
+    </div>
+</div>
 {% endblock %}
