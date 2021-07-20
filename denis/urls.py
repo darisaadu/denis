@@ -39,7 +39,7 @@ urlpatterns = [
     path('login/', login_view),
     path('logout/', logout_view),
     path('register/', register_view),
-    path('new_user_custormer_page/', custormer_page),
+    path('customer/', custormer_page),
     path('', email_entry_create_view),
     path('emails/', email_entry_list_view),
     path('emails/<int:id>/', email_entry_detail_view),

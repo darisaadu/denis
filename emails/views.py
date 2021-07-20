@@ -10,10 +10,13 @@ from . models import EmailEntry
 from .forms import EmailEntryForm, EmailEntryUpdateForm
 # Create your views here.
 
+
+@login_required
 def custormer_page(request, *args, **kwargs):
     return render(request, 'user_page.html', {})
 
 @login_required
+@admin_only
 def email_entry_update_view(request, id=None, *args, **kwargs):
     try:
         obj = EmailEntry.objects.get(id=id)
@@ -27,8 +30,7 @@ def email_entry_update_view(request, id=None, *args, **kwargs):
 
 
 @login_required
-# @allowed_users(['admin'])
-@admin_only
+@allowed_users(['admin'])
 def email_entry_create_view(request, *args, **kwargs):
     context = {}
     if request.user.is_authenticated:
@@ -45,7 +47,7 @@ def email_entry_create_view(request, *args, **kwargs):
 
 
 @login_required
-# @allowed_users(['admin'])
+@allowed_users(['admin'])
 def email_entry_list_view(request, *args, **kwargs):
     queryset = EmailEntry.objects.all()
     context = {'object_list': queryset}
@@ -53,8 +55,7 @@ def email_entry_list_view(request, *args, **kwargs):
 
 
 @login_required
-@admin_only
-# @allowed_users(['admin'])
+@allowed_users(['admin'])
 def email_entry_detail_view(request, id=None, *args, **kwargs):
     try:
         obj = EmailEntry.objects.get(id=id)
@@ -65,7 +66,7 @@ def email_entry_detail_view(request, id=None, *args, **kwargs):
 
 
 @login_required
-# @allowed_users(['admin'])
+@admin_only
 def email_entry_delete_view(request, id=None, *args, **kwargs):
     try:
         obj = EmailEntry.objects.get(id=id)
